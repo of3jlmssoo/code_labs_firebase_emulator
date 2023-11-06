@@ -64,3 +64,36 @@ firebase emulators:start --import ./emulators_data
 
 
 firebase emulators:start --import ./emulators_data --export-on-ex
+
+webでProejctとFirestoreは作っておく
+   curl -sL https://firebase.tools | bash
+firebase login
+   dart pub global activate flutterfire_cli
+firebase init
+flutterfire configure
+   flutter pub add firebase_core
+   flutter pub add firebase_auth
+   flutter pub add cloud_firestore
+main.dart編集
+```dart
+void main() async {
+ WidgetsFlutterBinding.ensureInitialized();
+ await Firebase.initializeApp(
+   options: DefaultFirebaseOptions.currentPlatform,
+ );
+
+ if (kDebugMode) {
+   try {
+     FirebaseFirestore.instance.useFirestoreEmulator('localhost', 8080);
+     await FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
+   } catch (e) {
+     // ignore: avoid_print
+     print(e);
+   }
+ }
+
+ runApp(MyApp());
+}
+
+```
+firebase emulators:start --import ./emulators_data --export-on-exit
