@@ -63,7 +63,7 @@ firebase emulators:export ./emulators_data
 firebase emulators:start --import ./emulators_data
 
 
-firebase emulators:start --import ./emulators_data --export-on-ex
+firebase emulators:start --import ./emulators_data --export-on-exit
 
 webでProejctとFirestoreは作っておく
    curl -sL https://firebase.tools | bash
